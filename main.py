@@ -1,15 +1,20 @@
+from operator import lt
 from packages import beer
-import json
 
-x = beer.random(3)
-print("RANDOM BEER SUGGESTION")
-for i in range(3):
-    print(json.dumps(x[i], indent=2))
 
-print('---*---'*20, end='\n\n')
+answer = int(input("Do you want:\n0. Random Beer\n1. Specified Beer\nYour Choice => "))
 
-y = beer.suggest_beer(no_of_suggestion=3, abv_get = 6, abv_lt= 9)
-print("SUGGESTION BASED ON YOUR CHOICE")
-for i in range(3):
-    print(json.dumps(x[i], indent=2))
+if answer:
+    abv_get = float(input("Specify minimum alcohol %: "))
+    abv_lt = float(input("Specify maximum alcohol %: "))
+    x = (beer.get_specified_beer(abv_get, abv_lt))
+    for i in range(3):
+        print(x[i])
+    
+else:
+    x = beer.get_random_beer()
+    for i in range(3):
+        print(x[i])
+
+
 
